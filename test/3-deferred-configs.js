@@ -32,6 +32,16 @@ vows.describe('Tests for deferred values').addBatch({
         assert.equal(CONFIG.welcomeEmail.aFunc(), 'Still just a function.');
     },
 
+    'values which are named "resolve" functions remain untouched unless they are proper objects': function() {
+        // If this had been treated as a deferred config value it would blow-up.
+        assert.equal(CONFIG.welcomeEmail.bFunc.resolve(), 'Still just a function.');
+    },
+
+    'values which are DeferredConfig-like objects, should be evaluated': function() {
+        // If this had been treated as a deferred config value it would blow-up.
+        assert.equal(CONFIG.welcomeEmail.cFunc, 'cFunc resolved!');
+    },
+
     // This defer function didn't use args, but relied 'this' being bound to the main config object
     "defer functions can simply refer to 'this'" : function () {
         assert.equal(CONFIG.welcomeEmail.justThis, 'Welcome to this New Instance!');

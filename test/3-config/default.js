@@ -8,6 +8,11 @@ var config = {
 
 };
 
+function DeferLike() {}
+DeferLike.prototype.resolve = function() {
+  return "cFunc resolved!";
+};
+
 // Set up a default value which refers to another value.
 // The resolution of the value is deferred until all the config files have been loaded
 // So that if 'config.siteTitle' is overridden, this will point to the correct value.
@@ -19,6 +24,14 @@ config.welcomeEmail = {
   aFunc  : function () {
     return "Still just a function.";
   },
+  // plain objects with a resolve function are still a function
+  bFunc : {
+    resolve: function() {
+      return "Still just a function.";
+    }
+  },
+  // proper objects with a resolve function are resolved
+  cFunc : Object.create(DeferLike.prototype),
 
   // Look ma, no arg passing. The main config object is bound to 'this'
   justThis: defer(function () {
