@@ -26,6 +26,7 @@
     "@types/node": "^7.0.8",
     "coffee-script": ">=1.7.0",
     "cson": "^3.0.1",
+    "eslint": "^2.8.0",
     "hjson": "^1.2.0",
     "js-yaml": "^3.2.2",
     "properties": "~1.2.1",
@@ -45,6 +46,7 @@
     "node": ">0.4.x"
   },
   "scripts": {
-    "test": "./node_modules/vows/bin/vows test/*.js --spec"
+    "test": "./node_modules/vows/bin/vows test/*.js --spec",
+    "lint": "eslint ."
   }
 }
