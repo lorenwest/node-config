@@ -3,7 +3,8 @@
     "dbName":"from_default_json",
     "dbPassword":"password will be overwritten.",
     "dbPassword2":"password will be overwritten.",
-    "lang":["en","es"]
+    "lang":["en","es"],
+    "lang2": "lang2 will be overwritten."
   },
   "AnotherModule": {
     "parm1":"value1"

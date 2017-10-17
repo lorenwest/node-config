@@ -28,6 +28,9 @@ vows.describe('Test suite for node-config')
       // Test for multi-instance applications
       process.env.NODE_APP_INSTANCE='3';
 
+      // Test for custom language  applications
+      process.env.NODE_CONFIG_LANG='EN,EN-GB';
+
       // Test $NODE_CONFIG environment and --NODE_CONFIG command line parameter
       process.env.NODE_CONFIG='{"EnvOverride":{"parm3":"overridden from $NODE_CONFIG","parm4":100}}';
       process.argv.push('--NODE_CONFIG={"EnvOverride":{"parm5":"overridden from --NODE_CONFIG","parm6":101}}');
@@ -110,8 +113,13 @@ vows.describe('Test suite for node-config')
     'Loading configurations from the local environment file is correct': function() {
       assert.equal(CONFIG.Customers.dbPassword2, 'another password');
       assert.deepEqual(CONFIG.Customers.lang, ['en','de','es']);
-    }
+    },
 
+    'Loading configuration from the custom language files is correct': function () {
+      assert.equal(CONFIG.Customers.lang2, 'EN overwrite');
+      assert.equal(CONFIG.Customers.lang3, 'EN-GB overwrite');
+      assert.equal(CONFIG.Customers.lang4, 'lang/local overwrite');
+    }
   },
 
   'Immutability': {
