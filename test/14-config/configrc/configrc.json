@@ -1,0 +1,6 @@
+{
+    "NODE_CONFIG_DIR": "./test/14-config",
+    "config": {
+        "configrc": "gotIt"
+    }
+}
