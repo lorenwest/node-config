@@ -50,6 +50,14 @@ vows.describe('Tests for config util functions')
           assert.strictEqual(result.number, 5);
           process.env.NODE_CONFIG = prev;
         },
+    },
+    'Tests for util.logger': {
+      'It can change the logger': function () {
+        var source = 'Hello World', result;
+        config.util.log = (message)=>{result = message};
+        config.util.log(source);
+        assert.strictEqual(source, result);
+      }
     }
 })
 .export(module);
