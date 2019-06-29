@@ -124,10 +124,21 @@ vows.describe('Test suite for node-config')
       assert.equal(CONFIG.MuteThis, 'world');
     },
 
+    'Added props sticks': function () {
+      CONFIG.ExtendThis.hello = 'world';
+      assert.equal(CONFIG.ExtendThis.hello, 'world');
+    },
+
     'No mutation after the first get()': function () {
       assert.equal(CONFIG.get('MuteThis'), 'world');
       CONFIG.MuteThis = 'backToHello';
       assert.equal(CONFIG.MuteThis, 'world');
+    },
+
+    'No extensions after the first get()': function () {
+      CONFIG.ExtendThis.newProp = 'shouldNotStick';
+      assert.equal(CONFIG.ExtendThis.hello, 'world');
+      assert.equal(typeof CONFIG.ExtendThis.newProp, 'undefined');
     }
   },
 

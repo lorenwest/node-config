@@ -20,6 +20,7 @@ module.exports = {
     parm2: 22
   },
   MuteThis: 'hello',
+  ExtendThis: {},
   get customerDbPort() {
     return '' + this.Customers.dbPort;
   },
