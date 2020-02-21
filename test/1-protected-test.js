@@ -293,6 +293,7 @@ vows.describe('Protected (hackable) utilities test')
         TestModule: {
           parm1: "SINGLE_SECOND_LEVEL"
         },
+        TestPartialReplace: "http://{{DOMAIN_NAME}}/index.html",
         Customers: {
           dbHost: 'DB_HOST',
           dbName: 'DB_NAME',
@@ -345,7 +346,7 @@ vows.describe('Protected (hackable) utilities test')
         }
       });
     },
-    'returns an object with keys matching down to mapped and JSON-parsed existing variabls': function (topic) {
+    'returns an object with keys matching down to mapped and JSON-parsed existing variables': function (topic) {
       vars = {
         'DB_HOST': '{"port":"3306","host":"example.com"}'
       };
@@ -360,16 +361,22 @@ vows.describe('Protected (hackable) utilities test')
         }
       });
     },
+    'returns an object with keys matching down to mapped and replaced existing variables': function (topic) {
+      vars = {
+        'DOMAIN_NAME': 'localhost'
+      };
+      var substituted = CONFIG.util.substituteDeep(topic, vars);
+      assert.deepEqual(substituted, {
+        TestPartialReplace: 'http://localhost/index.html'
+      });
+    },
     // Testing all the things in variable maps that don't make sense because ENV vars are always
     // strings.
     'Throws an error for leaf Array values': function (topic) {
-      vars = {
-        NON_EXISTENT_VAR: 'ignore_this'
-      };
+      vars = {};
       topic.Customers.dbHost = ['a', 'b', 'c'];
-      assert.throws(function () {
-        CONFIG.util.substituteDeep(topic, vars);
-      });
+      const substituted = CONFIG.util.substituteDeep(topic, vars) 
+      assert.deepEqual(substituted, vars)
     },
     'Throws an error for leaf Boolean values': function (topic) {
       vars = {
