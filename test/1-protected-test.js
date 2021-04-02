@@ -186,6 +186,12 @@ vows.describe('Protected (hackable) utilities test')
       var orig = Object.create({has: function() {}});
       var result = CONFIG.util.extendDeep({}, orig, {});
       assert.isFunction(result.has);
+    },
+    'Correctly extends from a node-config object': function() {
+      assert.deepEqual(
+        CONFIG.util.extendDeep({}, CONFIG.get('conf'), CONFIG.get('overrideConf')),
+        {"key": "override value"}
+      );
     }
   },
 
