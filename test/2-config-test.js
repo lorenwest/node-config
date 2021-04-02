@@ -259,9 +259,13 @@ vows.describe('Test suite for node-config')
 
   'Assuring a configuration array property can be made immutable': {
     'Correctly unable to change an immutable configuration': function() {
-      CONFIG.util.makeImmutable(CONFIG.TestModule, 'arr1');
-      CONFIG.TestModule.arr1 = ['bad value'];
-      assert.isTrue(CONFIG.TestModule.arr1[0] == 'arrValue1');
+      assert.throws(
+        function() {
+          CONFIG.util.makeImmutable(CONFIG.TestModule, 'arr1');
+          CONFIG.TestModule.arr1 = [ 'bad value' ];
+        },
+        /Can not update runtime configuration property: "arr1"\. Configuration objects are immutable unless ALLOW_CONFIG_MUTATIONS is set\./
+      )
     },
 
     'Correctly unable to add values to immutable array': function() {
