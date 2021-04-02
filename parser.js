@@ -55,6 +55,7 @@ Parser.tsParser = function(filename, content) {
   if (!require.extensions['.ts']) {
     require(TS_DEP).register({
       lazy: true,
+      transpileOnly: true,
       compilerOptions: {
         allowJs: true,
       }
