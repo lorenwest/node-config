@@ -1,0 +1,4 @@
+{
+  "privateKey": "< ./key.pem",
+  "htmlTag": "<a href=\"hello\">HELLO</a>"
+}
