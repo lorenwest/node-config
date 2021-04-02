@@ -48,7 +48,16 @@ Parser.xmlParser = function(filename, content) {
 };
 
 Parser.jsParser = function(filename, content) {
-  return require(filename);
+  // Imports config if it is exported via module.exports = ...
+  // See https://github.com/lorenwest/node-config/issues/524
+  var configObject = require(filename);
+
+  // Because of ES6 modules usage, `default` is treated as named export (like any other)
+  // Therefore config is a value of `default` key.
+  if (configObject.default) {
+    return configObject.default
+  }
+  return configObject;
 };
 
 Parser.tsParser = function(filename, content) {
