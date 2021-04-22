@@ -195,7 +195,9 @@ vows.describe('Test suite for node-config')
     },
 
     'Environment variables specified as a number but empty string passed': function () {
-      assert.equal(CONFIG.get('customEnvironmentVariables.mappedBy.formats.numberEmpty'), 0);
+      assert.throws(function () { CONFIG.get('customEnvironmentVariables.mappedBy.formats.numberEmpty'); },
+        /Configuration property "customEnvironmentVariables.mappedBy.formats.numberEmpty" is not defined/
+      )
     },
 
     'Environment variables specified as a number but alphanumeric string passed': function () {

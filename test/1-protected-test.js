@@ -347,7 +347,6 @@ vows.describe('Protected (hackable) utilities test')
       assert.deepEqual(substituted, {
         TopLevel: 0,
         Customers: {
-          dbName: '',
           oauth: {
             key: 'null',
             secret: 'false'
